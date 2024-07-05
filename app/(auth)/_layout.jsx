@@ -3,6 +3,11 @@ import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 
 const AuthLayout = () => {
+
+  const { isLoading, isLoggedIn } = useGlobalContext();
+
+  if (!isLoading && isLoggedIn) return <Redirect href="/home" />;
+
   return (
     <>
       <Stack>
