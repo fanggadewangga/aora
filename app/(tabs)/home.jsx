@@ -7,6 +7,7 @@ import Trending from '../../components/Trending'
 import EmptyState from '../../components/EmptyState'
 import { getAllVideos } from '../../lib/appwrite'
 import useAppWrite from '../../lib/useAppWrite'
+import VideoCard from '../../components/VideoCard'
 
 const Home = () => {
 
@@ -56,22 +57,12 @@ const Home = () => {
             />
           </View>
         )}
-        data={[
-          {
-            id:1
-          },
-          {
-            id:2
-          },
-          {
-            id:2
-          }
-        ]}
+        data={videos}
         keyExtractor={ (item) => item.$id}
         renderItem={({item}) => (
-          <Text className="text-3xl text-white">
-            {item.id}
-          </Text>
+          <VideoCard
+            video={item}
+          />
         )}
         ListEmptyComponent={ () => (
           <EmptyState
