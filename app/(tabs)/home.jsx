@@ -5,13 +5,14 @@ import { images } from '../../constants'
 import SearchInput from '../../components/SearchInput'
 import Trending from '../../components/Trending'
 import EmptyState from '../../components/EmptyState'
-import { getAllVideos } from '../../lib/appwrite'
+import { getAllVideos, getTrendingVideos } from '../../lib/appwrite'
 import useAppWrite from '../../lib/useAppWrite'
 import VideoCard from '../../components/VideoCard'
 
 const Home = () => {
 
   const { data: videos, reFetch } = useAppWrite(getAllVideos);
+  const { data: trendingVideos} = useAppWrite(getTrendingVideos);
   const [isRefreshing, setIsRefreshing] = useState(false)
 
   console.log(videos)
@@ -47,13 +48,13 @@ const Home = () => {
             <SearchInput
               placeholder='Search for a video topic'
             />
-            <View className='w-full flex-1 pt-5 pb-8'>
+            <View className='w-full flex-1'>
               <Text className='text-gray-100 text-lg font-psemibold mb-3'>
-                Latest Videos
+                Trending Videos
               </Text>
             </View>
             <Trending 
-              posts={[{id:1}, {id:2}, {id:3}] ?? []}
+              videos={trendingVideos}
             />
           </View>
         )}
