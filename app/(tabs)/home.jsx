@@ -1,18 +1,23 @@
-import { View, Text, FlatList, Image, RefreshControl } from 'react-native'
+import { View, Text, FlatList, Image, RefreshControl, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { images } from '../../constants'
 import SearchInput from '../../components/SearchInput'
 import Trending from '../../components/Trending'
 import EmptyState from '../../components/EmptyState'
+import { getAllVideos } from '../../lib/appwrite'
+import useAppWrite from '../../lib/useAppWrite'
 
 const Home = () => {
 
+  const { data: videos, reFetch } = useAppWrite(getAllVideos);
   const [isRefreshing, setIsRefreshing] = useState(false)
+
+  console.log(videos)
 
   const onRefresh = async () => {
     setIsRefreshing(true)
-    // recall new videos
+    await reFetch();
     setIsRefreshing(false)
   }
 
