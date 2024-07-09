@@ -8,12 +8,14 @@ import EmptyState from '../../components/EmptyState'
 import { getAllVideos, getTrendingVideos } from '../../lib/appwrite'
 import useAppWrite from '../../lib/useAppWrite'
 import VideoCard from '../../components/VideoCard'
+import { useGlobalContext } from '../../context/GlobalProvider'
 
 const Home = () => {
 
   const { data: videos, reFetch } = useAppWrite(getAllVideos);
   const { data: trendingVideos} = useAppWrite(getTrendingVideos);
   const [isRefreshing, setIsRefreshing] = useState(false)
+  const { user, setUser, setIsLoggedIn } = useGlobalContext();
 
   const onRefresh = async () => {
     setIsRefreshing(true)
@@ -32,7 +34,7 @@ const Home = () => {
                   Welcome back,
                 </Text>
                 <Text className='text-2xl font-psemibold text-white'>
-                  Fangga
+                  {user?.username}
                 </Text>
               </View>
               <View className='mt-1.5'>
