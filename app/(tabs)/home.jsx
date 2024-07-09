@@ -15,8 +15,6 @@ const Home = () => {
   const { data: trendingVideos} = useAppWrite(getTrendingVideos);
   const [isRefreshing, setIsRefreshing] = useState(false)
 
-  console.log(videos)
-
   const onRefresh = async () => {
     setIsRefreshing(true)
     await reFetch();
